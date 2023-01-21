@@ -27,14 +27,22 @@ const { nextISSTimesForMyLocation } = require('./iss');
 //   console.log("It worked! Returned fly-over times: ", flyOverTimes);
 // });
 
+
+const flyOverDates = function(flyOverTimes) {
+  for (let time of flyOverTimes) {
+    let date = new Date(time.risetime * 1000);
+    let dateFormat = date.toString();
+    console.log(`Next pass at ${dateFormat} for ${time.duration} seconds!`);
+  };
+};
+
 nextISSTimesForMyLocation((error, flyOverTimes) => {
   if (error) {
     return console.log("Finding the times for our location did not work", error);
   }
-
-  for (let time of flyOverTimes[0]) {
-    let date = new Date(time.risetime * 1000);
-    let dateFormat = date.toString();
-    console.log(`Next pass at ${dateFormat} for ${time.duration} seconds!`);
-  }
+  flyOverDates(flyOverTimes);
 });
+
+
+
+module.exports = { flyOverDates };

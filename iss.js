@@ -66,7 +66,7 @@ const fetchISSFlyOverTimes = function(coords, callback) {
     if (error) {
       return ('error: ', error);
     }
-    const flyOverTimes = [JSON.parse(body).response];
+    const flyOverTimes = JSON.parse(body).response;
     
     if (flyOverTimes) {
       callback(null, flyOverTimes);
@@ -105,6 +105,7 @@ const nextISSTimesForMyLocation = function(callback) {
     });
   });
 };
+
 
 
 
